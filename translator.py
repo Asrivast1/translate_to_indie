@@ -18,10 +18,17 @@ from deep_translator import GoogleTranslator as translate
 
 # Input the file name that you require to be translated
 file = input('Enter your input file name: ')
+
+max_limit = 4999
 fh = open(file, 'r')
 data = fh.read()
-inp = data.replace('\n', ' ')
-parts = [inp[i:i+4999] for i in range(0, len(inp), 4999)]
+inp = data.replace('\n', ' ').split(".")
+context_txt = []
+
+for elements in inp: 
+    parts = [elements[i:i+max_limit] for i in range(0, len(elements), max_limit)]
+    context_txt.append(parts[0])
+
 file2 = input('Enter the output file name in which you want to store the output: ')
 
 #Language options to select from
@@ -40,7 +47,7 @@ print("Your selected language is: " + answers['language'])
 
 lang = answers['language'][-2:]
 
-for sentences in parts:
+for sentences in context_txt:
     translated = translate(source='auto', target= lang).translate(sentences)
 
     print(translated)
