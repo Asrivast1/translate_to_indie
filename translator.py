@@ -1,17 +1,3 @@
-# Importing pip library to install python packages
-import pip
-
-# Function to install python module within code
-def install(package):
-    if hasattr(pip, 'main'):
-        pip.main(['install', package])
-    else:
-        pip._internal.main(['install', package])
-
-# Installing deep-translator for translation purposes and inquirer to generate selector interface
-install ('deep-translator')
-install ('inquirer')
-
 # Importing required libraries
 import inquirer
 from deep_translator import GoogleTranslator as translate
